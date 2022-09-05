@@ -1,0 +1,26 @@
+{
+  "name": "olamart",
+  "version": "1.0.0",
+  "description": "An Online Shop",
+  "main": "index.js",
+  "scripts": {
+    "start": "npdemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TenTraicion/olamart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TenTraicion/olamart/issues"
+  },
+  "homepage": "https://github.com/TenTraicion/olamart#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
