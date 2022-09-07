@@ -4,7 +4,7 @@
   "description": "An Online Shop",
   "main": "index.js",
   "scripts": {
-    "start": "npdemon app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
