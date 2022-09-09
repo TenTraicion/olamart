@@ -1,9 +1,9 @@
-<%- include("../includes/head", { pageTitle: "SignUp"}) %>
+<%- include("../../base/includes/head", { pageTitle: "SignUp"}) %>
 <link rel="stylesheet" href="/styles/forms.css">
 <link rel="stylesheet" href="/styles/auth.css">
 </head>
 <body>
-  <%- include("../includes/header") %>
+  <%- include("../../base/includes/header") %>
   <main>
     <h1>Create New Account</h1>
     <form action="/signup" method="POST">
@@ -45,4 +45,4 @@
       <p id="switch-form"><a href="/login">LogIn Instead</a></p>
     </form>
   </main>
-<%- include("../includes/footer") %>
+<%- include("../../base/includes/footer") %>
