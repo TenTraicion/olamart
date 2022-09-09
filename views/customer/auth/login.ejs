@@ -7,6 +7,7 @@
   <main>
     <h1>Log In</h1>
     <form action="/signup" method="POST">
+      <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
       <p>
         <label for="username">Username or E-Mail</label>
         <input type="text" id="username" name="username" required>
