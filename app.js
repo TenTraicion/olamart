@@ -6,7 +6,7 @@ const expressSession = require("express-session");
 const createSessionConfig = require("./config/session");
 const db = require("./data/database");
 const addCSRFToken = require("./middlewares/csrf-token");
-const handleErrors=require("./middlewares/error-handler");
+const handleErrors = require("./middlewares/error-handler");
 const authRoutes = require("./routes/auth.routes");
 const errRoutes = require("./routes/error.routes");
 

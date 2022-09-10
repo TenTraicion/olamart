@@ -77,3 +77,16 @@ a{
   background-color: var(--color-primary-700);
   border-color: var(--color-primary-700);
 }
+
+.text-block{
+  text-align: center;
+  height: 60px;
+  display: flex;
+  justify-content: space-evenly;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-gray-700);
+}
+
