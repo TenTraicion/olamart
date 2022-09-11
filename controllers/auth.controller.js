@@ -1,47 +1,55 @@
-const User = require("../models/user.model");
-const authUtil = require("../util/authentication");
+const User = require('../models/user.model');
+const authUtil = require('../util/authentication');
 
-function getSignUp(req, res) {
-  res.render("customer/auth/signup");
+function getSignup(req, res) {
+  res.render('customer/auth/signup');
 }
 
 async function signup(req, res) {
-  const data = req.body;
-  const user = new User(data.username, data.email, data.password, data.fullname, data.street, data.postal, data.city);
+  const user = new User(
+    req.body.email,
+    req.body.password,
+    req.body.fullname,
+    req.body.street,
+    req.body.postal,
+    req.body.city
+  );
 
   await user.signup();
 
-  res.redirect("/login");
+  res.redirect('/login');
 }
 
-function getLogIn(req, res) {
-  res.render("customer/auth/login");
+function getLogin(req, res) {
+  res.render('customer/auth/login');
 }
 
 async function login(req, res) {
-  const data = req.body;
-  const user = new User(data.email, data.password);
-  const existingUser = await user.getUser();
+  const user = new User(req.body.email, req.body.password);
+  const existingUser = await user.getUserWithSameEmail();
 
-  if(!existingUser) {
-    res.redirect("/login");
+  if (!existingUser) {
+    res.redirect('/login');
     return;
   }
 
-  const passwordIsCorrect = await user.matchPWD(existingUser.password);
+  const passwordIsCorrect = await user.hasMatchingPassword(
+    existingUser.password
+  );
 
-  if(!passwordIsCorrect) {
-    res.redirect("/login");
+  if (!passwordIsCorrect) {
+    res.redirect('/login');
     return;
   }
 
-  authUtil.createUserSession(req, existingUser, function() {
-    res.redirect("/");
+  authUtil.createUserSession(req, existingUser, function () {
+    res.redirect('/');
   });
 }
 
 module.exports = {
-  getSignUp: getSignUp,
-  getLogIn: getLogIn,
+  getSignup: getSignup,
+  getLogin: getLogin,
   signup: signup,
+  login: login
 };

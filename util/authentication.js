@@ -4,5 +4,5 @@ function createUserSession(req, user, action) {
 }
 
 module.exports = {
-  createUserSession: createUserSession,
-}
+  createUserSession: createUserSession
+};
