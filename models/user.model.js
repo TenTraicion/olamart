@@ -14,6 +14,10 @@ class User{
     };
   }
 
+  getUser() {
+    return db.getDb().collection("users").findOne({email: this.email});
+  }
+
   async signup() {
     const pwd = await bcrypt.hash(this.password, 16);
     await db.getDb().collection("users").insertOne({
@@ -23,6 +27,10 @@ class User{
       name: this.name,
       address: this.address,
     });
+  }
+
+  matchPWD(pwd) {
+    return bcrypt.compare(this.password, pwd);
   }
 }
 
