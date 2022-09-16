@@ -1,12 +1,21 @@
 const User = require("../models/user.model");
 const authUtil = require("../util/authentication");
 const validation = require("../util/validation");
+const sessionFlash = require("../util/session-flash");
 
 function getSignup(req, res) {
 	res.render("customer/auth/signup");
 }
 
 async function signup(req, res, next) {
+	const enteredData = {
+		email: req.body.email,
+		password: req.body.password,
+		fullname: req.body.fullname,
+		street: req.body.street,
+		postal: req.body.postal,
+		city: req.body.city
+	}
 	if (
 		!validation.userDetailsAreValid(
 			req.body.email,
@@ -17,7 +26,13 @@ async function signup(req, res, next) {
 			req.body.city
 		) || !validation.emailisConfirmed(req.body.email, req.body["confirm-email"])
 	) {
-		return res.redirect("/signup");
+		sessionFlash.flashDataToSession(req, {
+			errorMessage: "Input Invalid",
+			...enteredData
+		}, function() {
+			res.redirect("/signup");
+		});
+		return;
 	}
 
   const user = new User(
@@ -33,7 +48,13 @@ async function signup(req, res, next) {
     const existAlready = await user.existAlready();
 
     if(existAlready) {
-    return res.redirect("/login");
+			sessionFlash.flashDataToSession(req, {
+				errorMessage: "User Exist!",
+				...enteredData
+			}, function() {
+				res.redirect("/login");
+			});
+    return;
   }
 		await user.signup();
 	} catch (error) {
@@ -56,8 +77,16 @@ async function login(req, res, next) {
 		return next(error);
 	}
 
+	const sessionErrorData = {
+		errorMessage: "Invalid credentials!",
+		email: user.email,
+		password: user.password
+	};
+
 	if (!existingUser) {
-		res.redirect("/login");
+		sessionFlash.flashDataToSession(req, sessionErrorData, function() {
+			res.redirect("/login");
+		});
 		return;
 	}
 
@@ -66,7 +95,9 @@ async function login(req, res, next) {
 	);
 
 	if (!passwordIsCorrect) {
-		res.redirect("/login");
+		sessionFlash.flashDataToSession(req, sessionErrorData, function() {
+			res.redirect("/login");
+		});
 		return;
 	}
 
