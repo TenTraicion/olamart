@@ -1,6 +1,8 @@
 <header id="main-header">
   <div id="logo"><a href="/">WDE</a></div>
-  <%- include("nav") %>
+  <nav>
+    <%- include('nav-items') %>
+  </nav>
   <button id="mobile-menu-btn">
     <span></span>
     <span></span>
@@ -8,5 +10,7 @@
   </button>
 </header>
 <aside id="mobile-menu">
-  <%- include("nav") %>
+  <nav>
+    <%- include('nav-items') %>
+  </nav>
 </aside>
