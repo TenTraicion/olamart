@@ -1,13 +1,13 @@
 {
-  "name": "web-dev-complete-guide",
+  "name": "Olamart",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "Maximilian Schwarzmüller",
+  "author": "TenTraicion",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
