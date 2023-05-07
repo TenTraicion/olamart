@@ -1,1 +1,3 @@
 node_modules
+product-data/images/*
+!product-data/images/.gitkeep
