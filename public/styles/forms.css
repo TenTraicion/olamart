@@ -16,3 +16,8 @@ input, textarea {
   border: none;
   width: 90%;
 }
+
+/* If you wanna hide ta image field while uploading
+ .hidden {
+  display: none;
+} */
