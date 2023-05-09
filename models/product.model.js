@@ -69,6 +69,10 @@ class Product {
     this.image = newImage;
     this.updateImageData();
   }
+
+  remove() {
+    return db.getDb().collection('products').deleteOne({_id: new mongodb.ObjectId(this.id)});
+  }
 }
 
 module.exports = Product;
