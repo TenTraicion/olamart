@@ -17,7 +17,24 @@ input, textarea {
   width: 90%;
 }
 
-/* If you wanna hide ta image field while uploading
- .hidden {
+#image-upload-control {
+  display: flex;
+  align-items: center;
+}
+
+#image-upload-control input {
+  max-width: 15rem;
+}
+
+#image-upload-control img {
+  display: none;
+  width: 16rem;
+  height: 9rem;
+  object-fit: cover;
+  border-radius: var(--border-radius-small);
+}
+
+/* If you need to hide image section while editing image, you can use the following code: */
+/* #image-upload-control.hidden {
   display: none;
 } */
