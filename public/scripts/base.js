@@ -67,3 +67,16 @@ const showClock = () => {
 }
 
 setInterval(showClock, 100);
+
+// Show Referrer
+const linkOfTheWebsiteUserCame = document.referrer;
+
+console.log(linkOfTheWebsiteUserCame);
+
+// show referrer on 404 page
+const ref = document.getElementById("ref");
+ref.setAttribute("href", linkOfTheWebsiteUserCame);
+if (linkOfTheWebsiteUserCame == "") {
+    ref.setAttribute("href", "/");
+}
+
