@@ -18,6 +18,7 @@ class Cart {
         cartItem.quantity++;
         cartItem.totalPrice += product.price;
         this.items[i] = cartItem;
+        
         this.totalQuantity++;
         this.totalPrice += product.price;
         return;
