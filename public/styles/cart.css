@@ -37,6 +37,19 @@
   color: var(--color-primary-500);
 }
 
+#note {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#note .note{
+  font-size: .9rem;
+  font-style: italic;
+  color: var(--color-gray-300);
+}
+
 @media (min-width: 48rem) {
   .cart-item {
     flex-direction: row;

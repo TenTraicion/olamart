@@ -15,7 +15,16 @@
     </ul>
     <div id="cart-total">
       <p>Total: $<span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span></p>
-      <button class="btn">Buy</button>
+      <% if (locals.isAuth) { %>
+        <form action="/orders" method="post">
+          <button class="btn">Buy</button>
+        </form>
+      <% } else { %>
+        <div id="note">
+          <a href="/login" class="btn">Login to Buy</a>
+          <p class="note">You Must be Authorized to Complete this Action!</p>
+        </div>
+      <% } %>
     </div>
   </main>
 <%- include('../../shared/includes/footer') %>
