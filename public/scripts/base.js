@@ -3,17 +3,6 @@ const copy = document.getElementById("copy");
 const udate = new Date();
 copy.innerText = udate.getFullYear();
 
-//Load time
-let before_loadtime = udate.getTime();  
-     window.onload = Pageloadtime;  
-     function Pageloadtime() {  
-         let aftr_loadtime = udate.getTime();  
-         // Time calculating in seconds  
-         const pgloadtime = (aftr_loadtime - before_loadtime);  
-  
-         document.getElementById("loadtime").innerText = pgloadtime;  
-     } 
-
 // show date
 const show = document.getElementById("date");
 
@@ -79,4 +68,10 @@ ref.setAttribute("href", linkOfTheWebsiteUserCame);
 if (linkOfTheWebsiteUserCame == "") {
     ref.setAttribute("href", "/");
 }
+
+// Generate Load Time
+document.addEventListener('DOMContentLoaded', function() {
+  const load = performance.now() / 1000;
+  document.getElementById("loadtime").innerText = load.toFixed(2);
+}, false);
 
