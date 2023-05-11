@@ -1,8 +1,47 @@
+const Product = require("./product.model");
+
 class Cart {
 	constructor(items = [], totalPrice = 0, totalQuantity = 0) {
 		this.items = items;
 		this.totalPrice = totalPrice;
 		this.totalQuantity = totalQuantity;
+	}
+
+	async updatePrices() {
+		const productIds = this.items.map(function (item) {
+			return item.product.id;
+		});
+		const products = await Product.findMultiple(productIds);
+		const deletableCartItemProductIds = [];
+
+		for (const cartItem of this.items) {
+			const product = products.find(function (prod) {
+				return prod.id === cartItem.product.id;
+			});
+			if (!product) {
+				// product was deleted
+				// "scheduled for deletion"
+				deletableCartItemProductIds.push(cartItem.product.id);
+				continue;
+			}
+			// product still exists
+			// update cartItem price
+			cartItem.product = product;
+			cartItem.totalPrice = cartItem.product.price * cartItem.quantity;
+		}
+		if (deletableCartItemProductIds.length > 0) {
+			this.items = this.items.filter(function (item) {
+				return deletableCartItemProductIds.indexOf(item.product.id) < 0;
+			});
+		}
+		// update cart total price
+		this.totalQuantity = 0;
+		this.totalPrice = 0;
+
+		for (const item of this.items) {
+			this.totalQuantity += item.quantity;
+			this.totalPrice += item.totalPrice;
+		}
 	}
 
 	addItem(product) {

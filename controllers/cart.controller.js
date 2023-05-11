@@ -1,6 +1,6 @@
 const Product = require("../models/product.model");
 
-function getCart(req, res, next) {
+function getCart(req, res) {
   res.render('customer/cart/cart');
 }
 
@@ -20,12 +20,12 @@ async function addCartItem(req, res, next) {
   });
 }
 
-function updateCartItem(req, res, next) {
+function updateCartItem(req, res) {
   const cart = res.locals.cart;
-  const updatedItemData = cart.updateItem(req.body.id, req.body.quantity);
+  const updatedItemData = cart.updateItem(req.body.id, +req.body.quantity);
   req.session.cart = cart;
   res.status(200).json({
-    message: "Cart updated successfully!",
+    message: "Item Updated successfully!",
     updatedCartData: {
       newTotalQuantity: cart.totalQuantity,
       newTotalPrice: cart.totalPrice,
