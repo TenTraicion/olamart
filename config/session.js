@@ -1,5 +1,7 @@
-const expressSession = require('express-session');
-const mongoDbStore = require('connect-mongodb-session');
+require("dotenv").config();
+
+const expressSession = require("express-session");
+const mongoDbStore = require("connect-mongodb-session");
 
 let mongoUrl = "mongodb://127.0.0.1:27017/";
 let response = "sessions saved in local directory";
@@ -20,28 +22,28 @@ if (process.env.MONGO_USER) {
 }
 
 function createSessionStore() {
-  const MongoDBStore = mongoDbStore(expressSession);
+	const MongoDBStore = mongoDbStore(expressSession);
 
-  const store = new MongoDBStore({
-    uri: mongoUrl,
-    databaseName: db,
-    collection: 'sessions'
-  });
-  console.log(response);
+	const store = new MongoDBStore({
+		uri: mongoUrl,
+		databaseName: db,
+		collection: "sessions",
+	});
+	console.log(response);
 	console.log(`session: ${db}`);
-  return store;
+	return store;
 }
 
 function createSessionConfig() {
-  return {
-    secret: 'super-secret',
-    resave: false,
-    saveUninitialized: false,
-    store: createSessionStore(),
-    cookie: {
-      maxAge: 2 * 24 * 60 * 60 * 1000
-    }
-  };
+	return {
+		secret: "super-secret",
+		resave: false,
+		saveUninitialized: false,
+		store: createSessionStore(),
+		cookie: {
+			maxAge: 2 * 24 * 60 * 60 * 1000,
+		},
+	};
 }
 
 module.exports = createSessionConfig;
